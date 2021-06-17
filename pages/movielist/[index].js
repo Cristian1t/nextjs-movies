@@ -29,9 +29,10 @@ const Details = () => {
       <div>Response: {movie.Response}</div>
       <div>
         Images:
-        {movie.Images.map((image) => (
+        {movie.Images.map((image, index) => (
           <div>
             <Image
+              key={index}
               src={image}
               alt="image"
               width={500}
