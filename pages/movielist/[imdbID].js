@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import data from '../../assets/films.json';
 import StarRating from '../../components/StarRating/StarRating';
 import useLocalStorage from '../../hooks/useLocalStorage';
@@ -29,15 +29,19 @@ function MovieDetails({ movie }) {
 
   const [stars, setStars] = useLocalStorage(`stars${movie.imdbID}`, 0);
 
-  const [hover, setHover] = useLocalStorage(`hover${movie.imdbID}`, null);
-  const [disableClick, setDisableClick] = useLocalStorage(
-    `hover${movie.imdbID}`,
-    false
-  );
+  const [hover, setHover] = useState(null);
+  const [disableClick, setDisableClick] = useState(false);
+
+  useEffect(() => {
+    setDisableClick(stars !== 0 ? true : false);
+    setHover(stars !== 0 ? stars : null);
+  }, []);
 
   return (
     <div>
       <h1>{movie.Title}</h1>
+
+      <h2>Your rating: {stars}</h2>
       <StarRating
         voteCounter={voteCounter}
         setVoteCounter={setVoteCounter}
