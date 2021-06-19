@@ -1,10 +1,14 @@
 import React from 'react';
+import Link from 'next/link';
 
-function MovieCard({ title }) {
+function MovieCard({ title, id }) {
   return (
     <div>
-      <h3>{title}</h3>
-      <div></div>
+      <Link href={`/movielist/${id}`}>
+        <a>
+          <h3>{title}</h3>
+        </a>
+      </Link>
     </div>
   );
 }

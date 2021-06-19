@@ -1,11 +1,8 @@
-import Link from 'next/link';
 import React, { useState } from 'react';
-import data from '../../assets/films.json';
 import MovieCard from '../MovieCard/MovieCard';
 
-function Search() {
+function Search({ movies }) {
   const [searchName, setSearchName] = useState('');
-  console.log(searchName);
   return (
     <div>
       <h1>Search</h1>
@@ -15,7 +12,7 @@ function Search() {
         onChange={(event) => setSearchName(event.target.value)}
       />
       <div>
-        {data
+        {movies
           .filter((val) => {
             if (searchName === '') {
               return val;
@@ -25,12 +22,12 @@ function Search() {
               return val;
             }
           })
-          .map((movie, index) => (
-            <Link href={`/movielist/${index}`} key={movie.imdbID}>
-              <a>
-                <MovieCard title={movie.Title} />
-              </a>
-            </Link>
+          .map((movie) => (
+            <MovieCard
+              title={movie.Title}
+              key={movie.imdbID}
+              id={movie.imdbID}
+            />
           ))}
       </div>
     </div>

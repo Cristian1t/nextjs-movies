@@ -1,10 +1,18 @@
 import React from 'react';
 import Search from '../../components/Search/Search';
+import data from '../../assets/films.json';
 
-function Movies() {
+export async function getStaticProps(context) {
+  return {
+    props: { movies: data }, // will be passed to the page component as props
+  };
+}
+
+function Movies({ movies }) {
   return (
     <div>
-      <Search />
+      hello
+      <Search movies={movies} />
     </div>
   );
 }
