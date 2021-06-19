@@ -23,7 +23,7 @@ export async function getStaticProps({ params }) {
 function MovieDetails({ movie }) {
   const [voteCounter, setVoteCounter] = useLocalStorage(
     `votes${movie.imdbID}`,
-    `${movie.imdbVotes.replaceAll(',', '')}`
+    `${movie.imdbVotes}`
   );
   const [totalRating, setTotalRating] = useLocalStorage(
     `rating${movie.imdbID}`,

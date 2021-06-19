@@ -35,7 +35,7 @@ function StarRating({
         const handleClick = () => {
           setStars(rating);
           setDisableClick(true);
-          setVoteCounter(parseFloat(voteCounter) + 1);
+          setVoteCounter(parseFloat(voteCounter.replaceAll(',', '')) + 1);
         };
 
         return (
