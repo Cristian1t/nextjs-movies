@@ -3,7 +3,8 @@ import Layout from '../components/Layout/layout';
 
 const GlobalStyle = createGlobalStyle`
   body {
-    margin: 0;
+    margin: 0 auto;
+    width: 80%;
     padding: 0;
     box-sizing: border-box;
   }

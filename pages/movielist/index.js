@@ -9,12 +9,7 @@ export async function getStaticProps(context) {
 }
 
 function Movies({ movies }) {
-  return (
-    <div>
-      hello
-      <Search movies={movies} />
-    </div>
-  );
+  return <Search movies={movies} />;
 }
 
 export default Movies;

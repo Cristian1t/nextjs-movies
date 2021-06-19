@@ -48,7 +48,7 @@ function StarRating({
             <input type="radio" name="rating" onClick={handleClick} />
             <AiTwotoneStar
               className="star"
-              size={100}
+              size={50}
               color={rating <= (hover || stars) ? 'yellow' : 'grey'}
               onMouseEnter={() => setHover(rating)}
               onMouseLeave={() => setHover(null)}

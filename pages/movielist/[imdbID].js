@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import data from '../../assets/films.json';
 import StarRating from '../../components/StarRating/StarRating';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import { StyledMovie } from './styles';
+
+import Image from 'next/image';
 
 export async function getStaticPaths() {
   const paths = data.map((movie) => ({
@@ -20,7 +23,7 @@ export async function getStaticProps({ params }) {
 function MovieDetails({ movie }) {
   const [voteCounter, setVoteCounter] = useLocalStorage(
     `votes${movie.imdbID}`,
-    `${movie.imdbVotes.toString().replace(',', '')}`
+    `${movie.imdbVotes.toString().replaceAll(',', '')}`
   );
   const [totalRating, setTotalRating] = useLocalStorage(
     `rating${movie.imdbID}`,
@@ -38,23 +41,56 @@ function MovieDetails({ movie }) {
   }, []);
 
   return (
-    <div>
-      <h1>{movie.Title}</h1>
-
-      <h2>Your rating: {stars}</h2>
-      <StarRating
-        voteCounter={voteCounter}
-        setVoteCounter={setVoteCounter}
-        stars={stars}
-        setStars={setStars}
-        hover={hover}
-        setHover={setHover}
-        disableClick={disableClick}
-        setDisableClick={setDisableClick}
-      />
-      <h2>Total rating is {totalRating === 'N/A' ? 'N/A' : totalRating}</h2>
-      <h2>Votes: {voteCounter}</h2>
-    </div>
+    <StyledMovie>
+      <div className="maininfo">
+        <h1>{movie.Title}</h1>
+        <Image
+          src={movie.Poster}
+          alt={movie.title}
+          layout="fixed"
+          width={160}
+          height={200}
+        />
+      </div>
+      <div className="ratings">
+        <h2>Your rating: {stars}</h2>
+        <StarRating
+          voteCounter={voteCounter}
+          setVoteCounter={setVoteCounter}
+          stars={stars}
+          setStars={setStars}
+          hover={hover}
+          setHover={setHover}
+          disableClick={disableClick}
+          setDisableClick={setDisableClick}
+        />
+        <h2>Total rating is {totalRating === 'N/A' ? 'N/A' : totalRating}</h2>
+        <h2>Votes: {voteCounter}</h2>
+      </div>
+      <div className="otherinfo">
+        <h2>Plot: {movie.Plot}</h2>
+        <h3>Year: {movie.Year}</h3>
+        <h3>Released: {movie.Released}</h3>
+        <h3>Genre: {movie.Genre}</h3>
+        <h3>Director: {movie.Director}</h3>
+        <h3>Writer: {movie.Writer}</h3>
+        <h3>Actors: {movie.Actors}</h3>
+        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+          {movie.Images.map((item, index) => {
+            return (
+              <Image
+                src={item}
+                key={index}
+                alt={index}
+                layout="fixed"
+                width={250}
+                height={200}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </StyledMovie>
   );
 }
 

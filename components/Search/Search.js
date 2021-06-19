@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
 import MovieCard from '../MovieCard/MovieCard';
+import { StyledSearch } from './styles';
 
 function Search({ movies }) {
   const [searchName, setSearchName] = useState('');
   return (
-    <div>
-      <h1>Search</h1>
-      <input
-        type="text"
-        placeholder="Search..."
-        onChange={(event) => setSearchName(event.target.value)}
-      />
-      <div>
+    <StyledSearch>
+      <div className="topdiv">
+        <input
+          type="text"
+          placeholder="Search..."
+          onChange={(event) => setSearchName(event.target.value)}
+        />
+        <button
+          onClick={() => {
+            localStorage.clear();
+            window.location.reload();
+          }}
+        >
+          Restart application
+        </button>
+      </div>
+      <div className="cardarea">
         {movies
           .filter((val) => {
             if (searchName === '') {
@@ -27,10 +37,11 @@ function Search({ movies }) {
               title={movie.Title}
               key={movie.imdbID}
               id={movie.imdbID}
+              image={movie.Poster}
             />
           ))}
       </div>
-    </div>
+    </StyledSearch>
   );
 }
 

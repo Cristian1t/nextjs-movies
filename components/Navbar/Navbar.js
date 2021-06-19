@@ -1,23 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
+import { StyledNavbar } from './styles';
 
 function Navbar() {
   return (
-    <nav>
-      <div>
-        <Link href="/">
-          <a>MyMovies</a>
-        </Link>
-      </div>
-      <div>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
-        <Link href="/movielist">
-          <a>Movie List</a>
-        </Link>
-      </div>
-    </nav>
+    <StyledNavbar>
+      <Link href="/">
+        <a>Home</a>
+      </Link>
+      <Link href="/movielist">
+        <a>Movie List</a>
+      </Link>
+    </StyledNavbar>
   );
 }
 
