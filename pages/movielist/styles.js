@@ -26,3 +26,5 @@ export const StyledMovie = styled.div`
     grid-area: 2 / 1 / 3 / 3;
   }
 `;
+
+export default StyledMovie;
