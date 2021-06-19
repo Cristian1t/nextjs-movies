@@ -23,7 +23,7 @@ export async function getStaticProps({ params }) {
 function MovieDetails({ movie }) {
   const [voteCounter, setVoteCounter] = useLocalStorage(
     `votes${movie.imdbID}`,
-    `${movie.imdbVotes.toString().replaceAll(',', '')}`
+    `${movie.imdbVotes.replaceAll(',', '')}`
   );
   const [totalRating, setTotalRating] = useLocalStorage(
     `rating${movie.imdbID}`,
@@ -38,7 +38,7 @@ function MovieDetails({ movie }) {
   useEffect(() => {
     setDisableClick(stars !== 0 ? true : false);
     setHover(stars !== 0 ? stars : null);
-  }, []);
+  }, [stars]);
 
   return (
     <StyledMovie>
